@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Linktree Clone</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body, html {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+    }
+    
+    body {
+      background-image: url('assets/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 680px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .profile-img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+    
+    .name-section {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    
+    .name-section h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      margin-bottom: 4px;
+    }
+    
+    .name-section p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+    
+    .social-icons .icon {
+      background-color: rgba(255, 255, 255, 0.493);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .social-icons .icon:hover {
+      transform: scale(1.2);
+    }
+    
+    .links {
+      width: 100%;
+    }
+    
+    .card {
+      background-color: rgba(255, 255, 255, 0.411);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .link-container {
+      padding: 14px;
+      text-align: center;
+    }
+    
+    .link-container a {
+      display: block;
+      width: 100%;
+      font-weight: 600;
+      color: #363636;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .container {
+        width: 95%;
+      }
+      
+      .card {
+        margin-bottom: 14px;
+      }
+      
+      .social-icons .icon {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .link-container a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile">
+        <img src="assets/pp.jpg" alt="Profile Picture" class="profile-img">
+      <div class="name-section">
+        <h1>whdzera</h1>
+        <p>@_whdzera</p>
+      </div>
+      
+      <div class="social-icons">
+        <a href="https://instagram.com/_whdzera" class="icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="icon">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="#" class="icon">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://x.com/whdzera" class="icon">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="links">
+      <!-- Link Cards -->
+      <div class="card">
+        <div class="link-container">
+          <a href="http://whdzera.site">Blog</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="link-container">
+          <a href="https://saweria.co/whdzera">Saweria</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="link-container">
+          <a href="https://discordapp.com/users/whdzera">Discord</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="link-container">
+          <a href="https://github.com/whdzera">Github</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="link-container">
+          <a href="https://www.youtube.com/@whdzera9438">Youtube</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="link-container">
+          <a href="whdzera@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animation for cards on page load
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100 * index);
+      });
+      
+      // Track link clicks
+      const links = document.querySelectorAll('.link-container a');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const linkText = e.target.textContent;
+          console.log(`Link clicked: ${linkText}`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
