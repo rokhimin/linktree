@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Linktree</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
   <style>
         ::-webkit-scrollbar {
           width: 10px;
@@ -43,7 +42,7 @@
     }
     
     body {
-      background-image: url('assets/bg.jpg');
+      background-image: url('https://i.imgur.com/npcxMBd.jpeg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -61,6 +60,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
     
     .profile {
@@ -107,54 +108,49 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     }
     
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 24px;
-      gap: 12px;
-    }
-    
-    .social-icons .icon {
-      background-color: rgba(255, 255, 255, 0.493);
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      color: #333;
-      text-decoration: none;
-    }
-    
-    .social-icons .icon:hover {
-      transform: scale(1.2);
-    }
-    
     .links {
       width: 100%;
     }
     
     .card {
-      background-color: rgba(255, 255, 255, 0.411);
+      background-color: rgba(255, 255, 255, 0.26);
       backdrop-filter: blur(10px);
-      border-radius: 14px;
+      border-radius: 20px;
       margin-bottom: 16px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 100%;
+      width: 100%; 
+      height: 35px;
     }
     
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
+
+    .card-2 {
+      background-color: rgba(255, 255, 255, 0.411);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      margin-bottom: 16px;
+        
+    padding-left: 10px;
+    padding-right: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+    }
     
+    .card-2:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
     .link-container {
-      padding: 14px;
       text-align: center;
+      padding-top: 3.3px;
     }
     
     .link-container a {
@@ -164,6 +160,16 @@
       color: #363636;
       text-decoration: none;
       font-size: 18px;
+    }
+    
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
     
     @media screen and (max-width: 768px) {
@@ -178,6 +184,8 @@
       .social-icons .icon {
         width: 32px;
         height: 32px;
+        font-size: 16px;
+        line-height: 32px;
       }
       
       .link-container a {
@@ -187,29 +195,14 @@
   </style>
 </head>
 <body>
+  <canvas id="rainCanvas"></canvas>
   <div class="container">
     <div class="profile">
-        <img src="assets/pp.jpg" alt="Profile Picture" class="profile-img">
+        <img src="https://i.imgur.com/c04wuv6.png" alt="Profile Picture" class="profile-img">
       <div class="name-section">
         <h1>whdzera</h1>
         <p>@_whdzera</p>
       </div>
-      
-      <div class="social-icons">
-        <a href="https://instagram.com/_whdzera" class="icon">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="#" class="icon">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="#" class="icon">
-          <i class="fab fa-tiktok"></i>
-        </a>
-        <a href="https://x.com/whdzera" class="icon">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-    </div>
     
     <div class="links">
       <!-- Link Cards -->
@@ -249,9 +242,17 @@
         </div>
       </div>
 
-      <div class="name-section">
-        <h2>"Tool buatan ku yang mungkin berguna"</h2>
-      </div>
+      <br><br><br>
+
+        <div class="name-section">
+            <h2>"my tool"</h2>
+        </div>
+      
+        <div class="card">
+          <div class="link-container">
+            <a href="https://whdzera.site/to-do-list-app">To Do List</a>
+          </div>
+        </div>
       
       <div class="card">
         <div class="link-container">
@@ -337,6 +338,7 @@
         </div>
       </div>
 
+
     </div>
   </div>
   
@@ -362,69 +364,73 @@
           console.log(`Link clicked: ${linkText}`);
         });
       });
+      
+      // Rain animation
+      const canvas = document.getElementById('rainCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+      
+      // Rain drop class
+      class RainDrop {
+        constructor() {
+          this.reset();
+        }
+        
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = 0;
+          this.speed = 2 + Math.random() * 5;
+          this.length = 10 + Math.random() * 20;
+          this.opacity = 0.1 + Math.random() * 0.3;
+          this.thickness = 1 + Math.random() * 2;
+        }
+        
+        update() {
+          this.y += this.speed;
+          
+          if (this.y > canvas.height) {
+            this.reset();
+          }
+        }
+        
+        draw() {
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x, this.y + this.length);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          ctx.lineWidth = this.thickness;
+          ctx.stroke();
+        }
+      }
+      
+      // Create rain drops
+      const raindrops = [];
+      const rainCount = 100;
+      
+      for (let i = 0; i < rainCount; i++) {
+        raindrops.push(new RainDrop());
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        raindrops.forEach(drop => {
+          drop.update();
+          drop.draw();
+        });
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
     });
   </script>
-<canvas id="rainCanvas"></canvas>
-<script>
-  const canvas = document.getElementById("rainCanvas");
-  const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let drops = [];
-  const numDrops = 100; // Jumlah tetesan hujan
-
-  class RainDrop {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.length = Math.random() * 20 + 10;
-      this.speed = Math.random() * 2 + 2;
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x, this.y + this.length);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
-    }
-
-    update() {
-      this.y += this.speed;
-      if (this.y > canvas.height) {
-        this.y = -this.length;
-        this.x = Math.random() * canvas.width;
-      }
-      this.draw();
-    }
-  }
-
-  function createRain() {
-    for (let i = 0; i < numDrops; i++) {
-      drops.push(new RainDrop());
-    }
-  }
-
-  function animateRain() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drops.forEach(drop => drop.update());
-    requestAnimationFrame(animateRain);
-  }
-
-  createRain();
-  animateRain();
-
-  // Resize canvas jika ukuran layar berubah
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drops = [];
-    createRain();
-  });
-</script>
-
 </body>
 </html>
