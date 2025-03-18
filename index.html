@@ -364,5 +364,67 @@
       });
     });
   </script>
+<canvas id="rainCanvas"></canvas>
+<script>
+  const canvas = document.getElementById("rainCanvas");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let drops = [];
+  const numDrops = 100; // Jumlah tetesan hujan
+
+  class RainDrop {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.length = Math.random() * 20 + 10;
+      this.speed = Math.random() * 2 + 2;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x, this.y + this.length);
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+
+    update() {
+      this.y += this.speed;
+      if (this.y > canvas.height) {
+        this.y = -this.length;
+        this.x = Math.random() * canvas.width;
+      }
+      this.draw();
+    }
+  }
+
+  function createRain() {
+    for (let i = 0; i < numDrops; i++) {
+      drops.push(new RainDrop());
+    }
+  }
+
+  function animateRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drops.forEach(drop => drop.update());
+    requestAnimationFrame(animateRain);
+  }
+
+  createRain();
+  animateRain();
+
+  // Resize canvas jika ukuran layar berubah
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drops = [];
+    createRain();
+  });
+</script>
+
 </body>
 </html>
